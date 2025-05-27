@@ -36,6 +36,7 @@ class ApiClient {
     username: string
     email: string
     password: string
+    password2: string
     first_name?: string
     last_name?: string
     phone_number?: string
@@ -45,7 +46,15 @@ class ApiClient {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(userData),
+      body: JSON.stringify({
+        username: userData.username,
+        email: userData.email,
+        password: userData.password,
+        password2: userData.password2,
+        first_name: userData.first_name || "",
+        last_name: userData.last_name || "",
+        phone_number: userData.phone_number || ""
+      }),
     })
     
     const data = await response.json()
