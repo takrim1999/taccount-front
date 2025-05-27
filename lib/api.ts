@@ -38,6 +38,7 @@ class ApiClient {
     password: string
     first_name?: string
     last_name?: string
+    phone_number?: string
   }) {
     const response = await fetch(`${API_BASE_URL}/register/`, {
       method: "POST",
@@ -46,7 +47,14 @@ class ApiClient {
       },
       body: JSON.stringify(userData),
     })
-    return this.handleResponse<{ message: string }>(response)
+    
+    const data = await response.json()
+    
+    if (response.ok) {
+      return { success: true, message: "Registration successful" }
+    } else {
+      throw new Error(data.error || data.message || "Registration failed")
+    }
   }
 
   async login(credentials: { username: string; password: string }) {
