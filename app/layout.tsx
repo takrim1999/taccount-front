@@ -3,14 +3,13 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import { AuthProvider } from "@/contexts/auth-context"
-import { Navbar } from "@/components/layout/navbar"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "TService - Professional User Management",
-  description: "A modern frontend for user authentication and management",
-    generator: 'v0.dev'
+  title: "TService Authentication",
+  description: "Secure authentication for TService applications",
+  generator: 'v0.dev'
 }
 
 export default function RootLayout({
@@ -22,8 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <AuthProvider>
-          <Navbar />
-          <main>{children}</main>
+          <main className="min-h-screen bg-background">{children}</main>
         </AuthProvider>
       </body>
     </html>

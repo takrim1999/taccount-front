@@ -27,7 +27,10 @@ export default function LoginPage() {
 
     try {
       await login(username, password)
-      router.push("/dashboard")
+      // Get the return URL from query params or default to dashboard
+      const params = new URLSearchParams(window.location.search)
+      const returnUrl = params.get('returnUrl') || '/dashboard'
+      router.push(returnUrl)
     } catch (err) {
       setError(err instanceof Error ? err.message : "Login failed")
     } finally {
@@ -36,22 +39,22 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-6">
         <div className="text-center">
           <Link
             href="https://tservice.tech"
-            className="inline-flex items-center text-sm text-blue-600 hover:text-blue-800 mb-6"
+            className="inline-flex items-center text-sm text-muted-foreground hover:text-blue-600 mb-6"
           >
             <ArrowLeft className="h-4 w-4 mr-1" />
-            Back to TService
+            Back to Services
           </Link>
         </div>
 
         <Card>
           <CardHeader className="text-center">
             <CardTitle className="text-2xl font-bold">Welcome back</CardTitle>
-            <CardDescription>Sign in to your TService account</CardDescription>
+            <CardDescription>Sign in to continue to TService</CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -92,7 +95,7 @@ export default function LoginPage() {
 
             <div className="mt-6 space-y-4">
               <div className="text-center">
-                <Link href="/forgot-password" className="text-sm text-blue-600 hover:underline">
+                <Link href="/forgot-password" className="text-sm text-muted-foreground hover:text-blue-600">
                   Forgot your password?
                 </Link>
               </div>
@@ -102,14 +105,14 @@ export default function LoginPage() {
                   <span className="w-full border-t" />
                 </div>
                 <div className="relative flex justify-center text-xs uppercase">
-                  <span className="bg-white px-2 text-gray-500">Or</span>
+                  <span className="bg-background px-2 text-muted-foreground">Or</span>
                 </div>
               </div>
 
               <div className="text-center">
-                <span className="text-sm text-gray-600">Don't have an account? </span>
-                <Link href="/register" className="text-sm text-blue-600 hover:underline font-medium">
-                  Sign up
+                <span className="text-sm text-muted-foreground">Don't have an account? </span>
+                <Link href="/register" className="text-sm text-blue-600 hover:text-blue-700 font-medium">
+                  Get Started
                 </Link>
               </div>
             </div>
