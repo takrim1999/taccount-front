@@ -19,7 +19,7 @@ export interface ApiError {
 }
 
 class ApiClient {
-  private getAuthHeaders() {
+  private getAuthHeaders(): HeadersInit {
     const token = localStorage.getItem("auth_token")
     return token ? { Authorization: `Token ${token}` } : {}
   }
