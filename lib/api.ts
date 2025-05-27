@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://tservice.pythonanywhere.com"
+const API_BASE_URL = "https://tservice.pythonanywhere.com/api/taccount"
 
 export interface User {
   id: number
